@@ -17,7 +17,7 @@ RUN mkdir /root/.ssh
 COPY ./.known_hosts /root/.ssh/known_hosts
 
 ENV GIT_DIR /git
-COPY ./. /git
+COPY ./.git /git
 
 # The CWD needs to be mounted at /app at run time
 WORKDIR ${APP_DIR}
