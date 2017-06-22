@@ -112,6 +112,7 @@ def add_commit():
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
     subprocess.Popen(["git", "commit", "--allow-empty", "-m", message], stdout=subprocess.PIPE)
+    subprocess.Popen(["git", "pull", "--rebase", "origin", "master"], stdout=subprocess.PIPE)
     subprocess.Popen(["git", "push", "origin", "master"], stdout=subprocess.PIPE)
 
 
