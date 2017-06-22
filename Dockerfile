@@ -1,8 +1,8 @@
 FROM alpine
 
-COPY requirements.txt /tmp/requirements.txt
 RUN apk add --no-cache --update openssh git python3 bash
 RUN pip3 install --upgrade pip setuptools
+COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
 
 ENV APP_DIR /app
