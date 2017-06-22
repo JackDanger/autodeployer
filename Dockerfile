@@ -29,4 +29,4 @@ EXPOSE 5000
 # Cleanup
 RUN rm -rf /.wh /root/.cache /var/cache /tmp/requirements.txt
 
-CMD /usr/bin/flask run -h  0.0.0.0 -p 5000
+CMD python app.py
