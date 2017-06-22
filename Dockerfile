@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add --no-cache --update openssh git python3 bash
+RUN apk add --no-cache --update openssh git python3 python3-dev build-base bash 
 RUN pip3 install --upgrade pip setuptools
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
