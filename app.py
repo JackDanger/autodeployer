@@ -63,7 +63,7 @@ def maybe_add_commit():
     """
     if app.new_commit_added:
         return
-    if boot_time + 2 < time():
+    if boot_time + 60 < time():
         add_commit()
         app.new_commit_added = True
 
