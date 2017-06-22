@@ -60,8 +60,9 @@ except FileNotFoundError:
     p.communicate(input=private_key.encode('utf-8'))
 
 
-@app.route('/_status')
-def status():
+@app.route('/_age')
+def age():
+    "Return a 200 or 500 HTTP response code based on time since boot"
     maybe_add_commit()
     age = time() - boot_time
     if age < 60 * 10:
@@ -70,8 +71,9 @@ def status():
         return "Deploy time is over 10-minute threshold: {} seconds ago".format(int(age)), 500
 
 
-@app.route('/_info')
-def info():
+@app.route('/_status')
+def status():
+    "Display all about this instance"
     maybe_add_commit()
     return json.dumps({
             'sha': sha,
@@ -81,7 +83,10 @@ def info():
 
 @app.route('/')
 def root():
-    return '<h2>Current Autodeployer version: {}</h2>'.format(sha)
+    return """
+        <h2>Current Autodeployer version: {}</h2>
+        <pre><code>{}</code></pre>
+    """.format(sha, status())
 
 
 def maybe_add_commit():
