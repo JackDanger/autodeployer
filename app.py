@@ -18,6 +18,7 @@ import json
 import os
 from time import time
 from flask import Flask
+from flask import abort
 
 process = subprocess.Popen(["git", "rev-parse", "HEAD"], stdout=subprocess.PIPE)
 sha = process.communicate()[0].replace(b'\n', b'').decode('utf-8')
@@ -61,7 +62,16 @@ except FileNotFoundError:
 
 
 @app.route('/_status')
-def version():
+def status():
+    maybe_add_commit()
+    if boot_time + 60 * 10 < time():
+        return "Recently deployed"
+    else:
+        abort(500)
+
+
+@app.route('/_info')
+def info():
     maybe_add_commit()
     return json.dumps({
             'sha': sha,
