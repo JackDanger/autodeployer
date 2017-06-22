@@ -18,6 +18,8 @@ COPY ./.known_hosts /root/.ssh/known_hosts
 
 ENV GIT_DIR /git
 COPY ./.git /git
+RUN git remote set-url origin git@github.com:opsolutely/autodeployer.git
+ 
 
 # The CWD needs to be mounted at /app at run time
 WORKDIR ${APP_DIR}
