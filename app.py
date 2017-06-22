@@ -18,7 +18,6 @@ import json
 import os
 from time import time
 from flask import Flask
-from flask import abort
 
 process = subprocess.Popen(["git", "rev-parse", "HEAD"], stdout=subprocess.PIPE)
 sha = process.communicate()[0].replace(b'\n', b'').decode('utf-8')
@@ -64,10 +63,11 @@ except FileNotFoundError:
 @app.route('/_status')
 def status():
     maybe_add_commit()
-    if boot_time + 60 * 10 < time():
-        return "Recently deployed"
+    age = time() - boot_time
+    if age < 60 * 10:
+        return "Recently deployed: {} seconds ago".format(int(age)), 200
     else:
-        abort(500)
+        return "Deploy time is over 10-minute threshold: {} seconds ago".format(int(age)), 500
 
 
 @app.route('/_info')
@@ -98,10 +98,11 @@ def maybe_add_commit():
 
 
 def add_commit():
-    message = "{} - FROM {} in {}".format(
-            time(),
-            os.environ.get('COMMIT_HASH'),
-            os.environ.get('ENVIRONMENT'))
+    message = "{}".format(time)
+    if 'COMMIT_HASH' in os.environ:
+        message = message + " from {}".format(os.environ['COMMIT_HASH'])
+    if 'ENVIRONMENT' in os.environ:
+        message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
     subprocess.Popen(["git", "commit", "--allow-empty", "-m", message], stdout=subprocess.PIPE)
     subprocess.Popen(["git", "push", "origin", "master"], stdout=subprocess.PIPE)
