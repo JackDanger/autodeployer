@@ -113,7 +113,7 @@ def add_commit():
 
     subprocess.Popen(["git", "commit", "--allow-empty", "-m", message], stdout=subprocess.PIPE)
     subprocess.Popen(["git", "pull", "--rebase", "origin", "master"], stdout=subprocess.PIPE)
-    subprocess.Popen(["git", "push", "origin", "master"], stdout=subprocess.PIPE)
+    subprocess.Popen(["git", "push", "-f", "origin", "master"], stdout=subprocess.PIPE)
 
 
 if __name__ == "__main__":
