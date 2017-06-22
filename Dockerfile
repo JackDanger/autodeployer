@@ -29,4 +29,4 @@ EXPOSE 5000
 # Cleanup
 RUN rm -rf /.wh /root/.cache /var/cache /tmp/requirements.txt
 
-CMD python app.py
+CMD python3 app.py
