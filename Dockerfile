@@ -8,8 +8,13 @@ RUN pip3 install -r /tmp/requirements.txt
 ENV APP_DIR /app
 ENV FLASK_APP app.py
 ENV GIT_AUTHOR_NAME "Opsolutely Autodeployer"
+ENV GIT_COMMITTER_NAME "Opsolutely Autodeployer"
 ENV GIT_AUTHOR_EMAIL "autodeployer@opsolutely.com"
+ENV GIT_COMMITTER_EMAIL "autodeployer@opsolutely.com"
 
+
+RUN mkdir /root/.ssh
+COPY ./.known_hosts /root/.ssh/known_hosts
 
 # The CWD needs to be mounted at /app at run time
 WORKDIR ${APP_DIR}
