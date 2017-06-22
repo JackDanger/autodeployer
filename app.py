@@ -17,6 +17,7 @@ import subprocess
 import json
 import os
 from time import time
+from flask_twisted import Twisted
 from flask import Flask
 
 process = subprocess.Popen(["git", "rev-parse", "HEAD"], stdout=subprocess.PIPE)
@@ -27,6 +28,7 @@ private_key_location = "/{}/.ssh/id_rsa".format(whoami)
 
 app = Flask(__name__)
 app.new_commit_added = False
+twisted = Twisted(app)
 
 """
 First we make sure we have the right RSA private key to push new commits
@@ -111,3 +113,7 @@ def add_commit():
 
     subprocess.Popen(["git", "commit", "--allow-empty", "-m", message], stdout=subprocess.PIPE)
     subprocess.Popen(["git", "push", "origin", "master"], stdout=subprocess.PIPE)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
