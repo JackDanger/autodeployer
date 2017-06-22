@@ -1,3 +1,18 @@
+"""
+Opsolutely Autodeployer
+
+This app is a simple webservice that, when you GET /_status, will make
+new git commits to itself and then push them to GitHub.
+The commit only happens if the app has been booted for at least a
+minute. If this app is automatically deployed on every git commit to
+master then it functions as a self-deploying application.
+
+Once the app has been up for ten minutes the /_status endpoint begins to
+return HTTP 500 responses
+
+Deploys, like unit tests, should never take ten minutes.
+
+"""
 import subprocess
 import json
 import os
@@ -13,6 +28,10 @@ private_key_location = "/{}/.ssh/id_rsa".format(whoami)
 app = Flask(__name__)
 app.new_commit_added = False
 
+"""
+First we make sure we have the right RSA private key to push new commits
+to GitHub
+"""
 try:
     os.open(private_key_location, os.O_RDONLY)
 except FileNotFoundError:
@@ -69,5 +88,10 @@ def maybe_add_commit():
 
 
 def add_commit():
-    subprocess.Popen(["git", "commit", "--allow-empty", "-m", "time()"], stdout=subprocess.PIPE)
+    message = "{} - FROM {} in {}".format(
+            time(),
+            os.environ.get('COMMIT_HASH'),
+            os.environ.get('ENVIRONMENT'))
+
+    subprocess.Popen(["git", "commit", "--allow-empty", "-m", message], stdout=subprocess.PIPE)
     subprocess.Popen(["git", "push", "origin", "master"], stdout=subprocess.PIPE)
