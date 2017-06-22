@@ -103,7 +103,7 @@ def maybe_add_commit():
 
 
 def add_commit():
-    message = "{}".format(time)
+    message = "{}".format(time())
     if 'COMMIT_HASH' in os.environ:
         message = message + " from {}".format(os.environ['COMMIT_HASH'])
     if 'ENVIRONMENT' in os.environ:
