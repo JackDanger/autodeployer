@@ -103,7 +103,7 @@ def add_commit():
     if 'ENVIRONMENT' in os.environ:
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
-    p = subprocess.Popen('./autocommit.sh', stdout=subprocess.PIPE)
+    p = subprocess.Popen(['./autocommit.sh', message], stdout=subprocess.PIPE)
     print(p.communicate()[0].decode())
 
 if __name__ == "__main__":
