@@ -118,7 +118,7 @@ def add_commit():
 
 
 def run(cmd):
-    subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
     print(p.communicate()[0])
 
 if __name__ == "__main__":
