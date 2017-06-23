@@ -111,7 +111,7 @@ def add_commit():
     if 'ENVIRONMENT' in os.environ:
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
-    run(["git", "fetch", "origin", "master"])
+    run(["git", "fetch", "origin"])
     run(["git", "reset", "--hard", "origin/bump"])
     run(["git", "commit", "--allow-empty", "-m", message])
     run(["git", "push", "--force", "origin", "HEAD:bump"])
