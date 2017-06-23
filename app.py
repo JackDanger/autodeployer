@@ -25,6 +25,8 @@ sha = process.communicate()[0].replace(b'\n', b'').decode('utf-8')
 whoami = os.popen('whoami').read().replace('\n', '')
 boot_time = time()
 private_key_location = "/{}/.ssh/id_rsa".format(whoami)
+branch_to_push_to = os.environ['PUSH_TO']
+
 
 app = Flask(__name__)
 app.new_commit_added = False
@@ -112,9 +114,9 @@ def add_commit():
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
     run(["git", "fetch", "origin"])
-    run(["git", "reset", "--hard", "origin/bump"])
+    run(["git", "reset", "--hard", "origin/{}".format(branch_to_push_to)])
     run(["git", "commit", "--allow-empty", "-m", message])
-    run(["git", "push", "--force", "origin", "HEAD:bump"])
+    run(["git", "push", "--force", "origin", "HEAD:{}".format(branch_to_push_to)])
 
 
 def run(cmd):
