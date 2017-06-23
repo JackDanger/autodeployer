@@ -25,7 +25,6 @@ sha = process.communicate()[0].replace(b'\n', b'').decode('utf-8')
 whoami = os.popen('whoami').read().replace('\n', '')
 boot_time = time()
 private_key_location = "/{}/.ssh/id_rsa".format(whoami)
-branch_to_push_to = os.environ['PUSH_TO']
 
 
 app = Flask(__name__)
@@ -113,18 +112,7 @@ def add_commit():
     if 'ENVIRONMENT' in os.environ:
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
-    try:
-        run(["git", "fetch", "origin"])
-        run(["git", "checkout", "-f", branch_to_push_to])
-        run(["git", "reset", "--hard", "origin/{}".format(branch_to_push_to)])
-        run(["git", "commit", "--allow-empty", "-m", message])
-        run(["git", "push", "--force", "origin", "HEAD:{}".format(branch_to_push_to)])
-    except:
-        pass  # We'll just try again
-
-
-def run(cmd):
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    p = subprocess.Popen('./autocommit.sh', stdout=subprocess.PIPE)
     print(p.communicate()[0])
 
 if __name__ == "__main__":
