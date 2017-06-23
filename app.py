@@ -81,14 +81,20 @@ def status():
     return json.dumps({
             'sha': sha,
             'deploy_time': boot_time,
-        })
+            'age_in_seconds': int(time() - boot_time),
+        }, indent=4)
 
 
 @app.route('/')
 def root():
     return """
-        <h2>Current Autodeployer version: {}</h2>
+        <h2>Opsolutely Autodeployer</h2>
         <pre><code>{}</code></pre>
+        <p>
+          Alerting is programmed to read the <a href="/_age">/_age</a>
+          endpoint which will return HTTP 500 after this app has been
+          running for 60 seconds.
+        </p>
     """.format(sha, status())
 
 
