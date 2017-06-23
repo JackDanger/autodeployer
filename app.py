@@ -113,11 +113,14 @@ def add_commit():
     if 'ENVIRONMENT' in os.environ:
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
-    run(["git", "fetch", "origin"])
-    run(["git", "checkout", branch_to_push_to])
-    run(["git", "reset", "--hard", "origin/{}".format(branch_to_push_to)])
-    run(["git", "commit", "--allow-empty", "-m", message])
-    run(["git", "push", "--force", "origin", "HEAD:{}".format(branch_to_push_to)])
+    try:
+        run(["git", "fetch", "origin"])
+        run(["git", "checkout", "-f", branch_to_push_to])
+        run(["git", "reset", "--hard", "origin/{}".format(branch_to_push_to)])
+        run(["git", "commit", "--allow-empty", "-m", message])
+        run(["git", "push", "--force", "origin", "HEAD:{}".format(branch_to_push_to)])
+    except:
+        pass  # We'll just try again
 
 
 def run(cmd):
