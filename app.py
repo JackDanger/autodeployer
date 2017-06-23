@@ -112,9 +112,9 @@ def add_commit():
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
     run(["git", "fetch", "origin", "master"])
-    run(["git", "reset", "--hard", "origin/master"])
+    run(["git", "reset", "--hard", "origin/bump"])
     run(["git", "commit", "--allow-empty", "-m", message])
-    run(["git", "push", "--force", "origin", "HEAD:master"])
+    run(["git", "push", "--force", "origin", "HEAD:bump"])
 
 
 def run(cmd):
