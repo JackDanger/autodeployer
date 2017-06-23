@@ -66,7 +66,7 @@ except FileNotFoundError:
 @app.route('/_age')
 def age():
     "Return a 200 or 500 HTTP response code based on time since boot"
-    add_commit()
+    maybe_add_commit()
     age = time() - boot_time
     if age < 60 * 10:
         return "Recently deployed: {} seconds ago".format(int(age)), 200
@@ -77,7 +77,7 @@ def age():
 @app.route('/_status')
 def status():
     "Display all about this instance"
-    add_commit()
+    maybe_add_commit()
     return json.dumps({
             'sha': sha,
             'deploy_time': boot_time,
@@ -92,10 +92,23 @@ def root():
         <pre><code>{}</code></pre>
         <p>
           Alerting is programmed to read the <a href="/_age">/_age</a>
-          endpoint which will return HTTP 500 after this app has been
+          endpoint which will return HTTP j00 after this app has been
           running for 60 seconds.
         </p>
     """.format(sha, status())
+
+
+def maybe_add_commit():
+    """
+    If the app has been booted for at least a minute then make a new git
+    commit, then no longer attempt this function for the life of the
+    process.
+    """
+    if app.new_commit_added:
+        return
+    if boot_time + 60 < time():
+        add_commit()
+        app.new_commit_added = True
 
 
 def add_commit():
