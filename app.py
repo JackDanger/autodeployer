@@ -66,7 +66,7 @@ except FileNotFoundError:
 @app.route('/_age')
 def age():
     "Return a 200 or 500 HTTP response code based on time since boot"
-    maybe_add_commit()
+    add_commit()
     age = time() - boot_time
     if age < 60 * 10:
         return "Recently deployed: {} seconds ago".format(int(age)), 200
@@ -77,7 +77,7 @@ def age():
 @app.route('/_status')
 def status():
     "Display all about this instance"
-    maybe_add_commit()
+    add_commit()
     return json.dumps({
             'sha': sha,
             'deploy_time': boot_time,
@@ -92,20 +92,11 @@ def root():
     """.format(sha, status())
 
 
-def maybe_add_commit():
-    """
-    If the app has been booted for at least a minute then make a new git
-    commit, then no longer attempt this function for the life of the
-    process.
-    """
-    if app.new_commit_added:
-        return
-    if boot_time + 60 < time():
-        add_commit()
-        app.new_commit_added = True
-
-
 def add_commit():
+    '''
+    The autocommit.sh script checks that there hasn't already been a
+    commit in the last minute
+    '''
     message = "{}".format(time())
     if 'COMMIT_HASH' in os.environ:
         message = message + " from {}".format(os.environ['COMMIT_HASH'])
@@ -113,7 +104,8 @@ def add_commit():
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
     p = subprocess.Popen('./autocommit.sh', stdout=subprocess.PIPE)
-    print(p.communicate()[0])
+    print(p.communicate()[0].decode())
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    print("starting")
+    app.run(host='0.0.0.0', debug=True)
