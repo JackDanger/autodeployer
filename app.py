@@ -88,7 +88,12 @@ def status():
 @app.route('/')
 def root():
     return """
-        <h2>Opsolutely Autodeployer</h2>
+        <h2>
+            Opsolutely
+            <a href="https://github.com/opsolutely/autodeployer>
+                Autodeployer
+            </a>
+        </h2>
         <pre><code>{}</code></pre>
         <p>
           Alerting is programmed to read the <a href="/_age">/_age</a>
