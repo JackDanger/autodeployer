@@ -90,7 +90,7 @@ def root():
     return """
         <h2>
             Opsolutely
-            <a href="https://github.com/opsolutely/autodeployer>
+            <a href="https://github.com/opsolutely/autodeployer">
                 Autodeployer
             </a>
         </h2>
