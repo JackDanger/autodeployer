@@ -111,10 +111,15 @@ def add_commit():
     if 'ENVIRONMENT' in os.environ:
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
-    subprocess.Popen(["git", "commit", "--allow-empty", "-m", message], stdout=subprocess.PIPE)
-    subprocess.Popen(["git", "pull", "--rebase", "origin", "master"], stdout=subprocess.PIPE)
-    subprocess.Popen(["git", "push", "-f", "origin", "master"], stdout=subprocess.PIPE)
+    run(["git", "fetch", "origin", "master"])
+    run(["git", "reset", "--hard", "origin/master"])
+    run(["git", "commit", "--allow-empty", "-m", message])
+    run(["git", "push", "--force", "origin", "HEAD:master"])
 
+
+def run(cmd):
+    subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    print(p.communicate()[0])
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
