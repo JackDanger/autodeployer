@@ -97,7 +97,7 @@ def root():
         <pre><code>{}</code></pre>
         <p>
           Alerting is programmed to read the <a href="/_age">/_age</a>
-          endpoint which will return HTTP j00 after this app has been
+          endpoint which will return HTTP 500 after this app has been
           running for 60 seconds.
         </p>
     """.format(status())
