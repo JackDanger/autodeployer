@@ -95,7 +95,7 @@ def root():
           endpoint which will return HTTP j00 after this app has been
           running for 60 seconds.
         </p>
-    """.format(sha, status())
+    """.format(status())
 
 
 def maybe_add_commit():
