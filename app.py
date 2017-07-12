@@ -106,14 +106,11 @@ def root():
 def maybe_add_commit():
     """
     If the app has been booted for at least a minute then make a new git
-    commit, then no longer attempt this function for the life of the
+    commit, then repeatedly attempt this function for the life of the
     process.
     """
-    if app.new_commit_added:
-        return
     if boot_time + 60 < time():
         add_commit()
-        app.new_commit_added = True
 
 
 def add_commit():
