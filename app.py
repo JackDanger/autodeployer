@@ -16,6 +16,7 @@ Deploys, like unit tests, should never take ten minutes.
 import subprocess
 import json
 import os
+from datetime import datetime
 from time import time
 from flask_twisted import Twisted
 from flask import Flask
@@ -118,7 +119,7 @@ def add_commit():
     The autocommit.sh script checks that there hasn't already been a
     commit in the last minute
     '''
-    message = "{}".format(time())
+    message = "{} UTC".format(datetime.utcnow())
     if 'COMMIT_HASH' in os.environ:
         message = message + " from {}".format(os.environ['COMMIT_HASH'])
     if 'ENVIRONMENT' in os.environ:
