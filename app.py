@@ -121,7 +121,7 @@ def add_commit():
     '''
     message = "{} UTC".format(datetime.utcnow())
     if 'COMMIT_HASH' in os.environ:
-        message = message + " from {}".format(os.environ['COMMIT_HASH'])
+        message = message + " from {}".format(os.environ['COMMIT_HASH'][0:7])
     if 'ENVIRONMENT' in os.environ:
         message = message + " in {}".format(os.environ['ENVIRONMENT'])
 
