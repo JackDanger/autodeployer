@@ -26,4 +26,4 @@ traitlets==4.3.2
 Twisted==17.5.0
 wcwidth==0.1.7
 Werkzeug==0.12.2
-zope.interface==4.4.2
+zope.interface==4.4.3
