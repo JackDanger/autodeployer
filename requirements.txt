@@ -1,5 +1,5 @@
 appnope==0.1.0
-attrs==17.2.0
+attrs==17.3.0
 Automat==0.6.0
 click==6.7
 constantly==15.1.0
