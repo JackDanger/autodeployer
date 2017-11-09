@@ -15,7 +15,7 @@ jedi==0.10.2
 Jinja2==2.9.6
 MarkupSafe==1.0
 observable==0.3.2
-pexpect==4.2.1
+pexpect==4.3.0
 pickleshare==0.7.4
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
