@@ -17,7 +17,7 @@ MarkupSafe==1.0
 observable==0.3.2
 pexpect==4.2.1
 pickleshare==0.7.4
-prompt-toolkit==1.0.15
+prompt-toolkit==2.0.2
 ptyprocess==0.5.2
 Pygments==2.2.0
 simplegeneric==0.8.1
