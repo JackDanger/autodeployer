@@ -12,8 +12,8 @@ ipython==7.9.0
 ipython-genutils==0.2.0
 itsdangerous==0.24
 jedi==0.10.2
+MarkupSafe==1.1.1
 Jinja2==2.10.1
-MarkupSafe==1.0
 observable==0.3.2
 pexpect==4.7.0
 pickleshare==0.7.4
