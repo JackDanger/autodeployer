@@ -21,7 +21,7 @@ prompt-toolkit==3.0.2
 ptyprocess==0.6.0
 Pygments==2.5.2
 simplegeneric==0.8.1
-six==1.13.0
+six==1.15.0
 traitlets==4.3.3
 Twisted==19.10.0
 wcwidth==0.1.8
