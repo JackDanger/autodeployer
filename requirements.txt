@@ -3,7 +3,7 @@ attrs==19.3.0
 Automat==20.2.0
 click==7.0
 constantly==15.1.0
-decorator==4.4.1
+decorator==5.0.8
 Flask==1.1.1
 Flask-Twisted==0.1.2
 hyperlink==19.0.0
