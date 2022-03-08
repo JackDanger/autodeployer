@@ -1,4 +1,4 @@
-appnope==0.1.0
+appnope==0.1.2
 attrs==21.3.0
 Automat==20.2.0
 click==8.0.4
