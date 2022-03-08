@@ -24,6 +24,6 @@ simplegeneric==0.8.1
 six==1.16.0
 traitlets==4.3.3
 Twisted==22.2.0
-wcwidth==0.1.8
+wcwidth==0.2.5
 Werkzeug==2.0.3
 zope.interface==4.7.1
