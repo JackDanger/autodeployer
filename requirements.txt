@@ -17,7 +17,7 @@ Jinja2==3.1.0
 observable==1.0.3
 pexpect==4.8.0
 pickleshare==0.7.5
-prompt-toolkit==3.0.28
+prompt-toolkit==3.0.29
 ptyprocess==0.7.0
 Pygments==2.11.2
 simplegeneric==0.8.1
