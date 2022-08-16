@@ -19,7 +19,7 @@ pexpect==4.8.0
 pickleshare==0.7.5
 prompt-toolkit==3.0.28
 ptyprocess==0.7.0
-Pygments==2.11.2
+Pygments==2.13.0
 simplegeneric==0.8.1
 six==1.16.0
 traitlets==5.1.1
