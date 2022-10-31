@@ -1,6 +1,6 @@
 appnope==0.1.2
 attrs==21.4.0
-Automat==20.2.0
+Automat==22.10.0
 click==8.0.4
 constantly==15.1.0
 decorator==5.1.1
